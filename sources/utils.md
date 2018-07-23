@@ -259,7 +259,7 @@ __参数__
 
 
 ```python
-keras.utils.multi_gpu_model(model, gpus)
+keras.utils.multi_gpu_model(model, gpus=None, cpu_merge=True, cpu_relocation=False)
 ```
 
 
@@ -270,7 +270,7 @@ keras.utils.multi_gpu_model(model, gpus)
 
 - 将模型的输入分成多个子批次。
 - 在每个子批次上应用模型副本。
-每个模型副本都在专用 GPU 上执行。
+每个模型副本都在一个专用的 GPU 上执行。
 - 将结果（在 CPU 上）连接成一个大批量。
 
 例如， 如果你的 `batch_size` 是 64，且你使用 `gpus=2`，
@@ -287,6 +287,9 @@ __参数__
 详见下面的使用样例。
 - __gpus__: 整数 >= 2 或整数列表，创建模型副本的 GPU 数量，
 或 GPU ID 的列表。
+- __cpu_merge__: 一个布尔值，用来确定是否在 CPU 的范围内强制合并模型权重。
+- __cpu_relocation__: 一个布尔值，用来确定是否在 CPU 的范围内创建模型的权重。
+如果模型没有在任何一个设备范围内定义，您仍然可以通过激活这个选项来实现它。
 
 __返回__
 
